@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 private let kTitleViewH :CGFloat = 40
 
@@ -23,11 +24,12 @@ class HomeViewController: UIViewController {
     
     private lazy var pageContentView : PageContentView = {[weak self] in
         
-        let contentH = kScreenH - kStatusBarH - kNavigationBarH - kTitleViewH - kLiuhaiH
+        let contentH = kScreenH - kStatusBarH - kNavigationBarH - kTitleViewH - kLiuhaiH - kTabbarH
         let contentFrame = CGRect(x: 0, y: kStatusBarH+kNavigationBarH+kTitleViewH+kLiuhaiH, width: kScreenW, height: contentH)
         
         var childVcs = [UIViewController]()
-        for _ in 0..<4 {
+        childVcs.append(RecommendViewController())
+        for _ in 0..<3 {
             let vc = UIViewController()
             vc.view.backgroundColor = UIColor(r: CGFloat(arc4random_uniform(255)), g: CGFloat(arc4random_uniform(255)), b: CGFloat(arc4random_uniform(255)))
             childVcs.append(vc)
@@ -41,6 +43,15 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+        
+//        NetworkTools.requestData(type: .GET, URLString: "http://httpbin.org/get") { (result) in
+//            print(result)
+//        }
+        
+//        NetworkTools.requestData(type: .POST, URLString: "http://httpbin.org/post", parameters: ["name" : "jacksun"]) { (result) in
+//            print(result)
+//        }
+        
     }
 
 }
